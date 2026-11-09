@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSIS SMAN 1 Wanasari | Kabinet Phoenix</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        fiery: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                            800: '#9f1239',
+                            900: '#881337',
+                            950: '#4c0519',
+                        },
+                        amberGlow: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #070306;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #070306;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #be123c;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f43f5e;
+        }
+        .glow-text {
+            text-shadow: 0 0 20px rgba(244, 63, 94, 0.6), 0 0 40px rgba(245, 158, 11, 0.4);
+        }
+        .glow-box {
+            box-shadow: 0 0 30px rgba(225, 29, 72, 0.25);
+            transition: all 0.3s ease;
+        }
+        .glow-box:hover {
+            box-shadow: 0 0 40px rgba(244, 63, 94, 0.5), 0 0 60px rgba(245, 158, 11, 0.3);
+        }
+        .phoenix-gradient {
+            background: linear-gradient(135deg, #fff1f2 0%, #f43f5e 40%, #fbbf24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        #fireCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body class="bg-[#070306] text-gray-100 relative selection:bg-fiery-600 selection:text-white">
+
+    <!-- Fire Ember Particle Canvas -->
+    <canvas id="fireCanvas"></canvas>
+
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-[#090508]/85 backdrop-blur-md border-b border-fiery-950/50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo & School Name -->
+                <a href="#home" class="flex items-center space-x-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-fiery-600 to-amberGlow-500 flex items-center justify-center glow-box group-hover:scale-105 transition-transform">
+                        <i data-lucide="flame" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <div>
+                        <span class="text-base sm:text-lg font-black tracking-wider phoenix-gradient">OSIS SMAN 1 WANASARI</span>
+                        <p class="text-[10px] text-gray-400 font-medium tracking-widest uppercase">Kepengurusan 2026/2027</p>
+                    </div>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-sm font-semibold text-gray-300 hover:text-fiery-500 transition-colors">Beranda</a>
+                    <a href="#about" class="text-sm font-semibold text-gray-300 hover:text-fiery-500 transition-colors">Filosofi</a>
+                    <a href="#bph" class="text-sm font-semibold text-gray-300 hover:text-fiery-500 transition-colors">BPH</a>
+                    <a href="#members" class="text-sm font-semibold text-gray-300 hover:text-fiery-500 transition-colors">Direktori Pengurus</a>
+                    <a href="#programs" class="text-sm font-semibold text-gray-300 hover:text-fiery-500 transition-colors">Program Kerja</a>
+                    <a href="#contact" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-fiery-600 to-amberGlow-500 text-white text-sm font-bold shadow-lg shadow-fiery-900/40 hover:brightness-110 active:scale-95 transition-all">Aspirasi</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobileMenuBtn" class="p-2 rounded-lg bg-gray-900 border border-gray-800 text-gray-300 hover:text-white focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden bg-[#090508]/95 border-b border-gray-800 px-4 pt-2 pb-6 space-y-3 backdrop-blur-xl">
+            <a href="#home" class="block py-2 text-base font-medium text-gray-300 hover:text-fiery-500">Beranda</a>
+            <a href="#about" class="block py-2 text-base font-medium text-gray-300 hover:text-fiery-500">Filosofi</a>
+            <a href="#bph" class="block py-2 text-base font-medium text-gray-300 hover:text-fiery-500">BPH</a>
+            <a href="#members" class="block py-2 text-base font-medium text-gray-300 hover:text-fiery-500">Direktori Pengurus</a>
+            <a href="#programs" class="block py-2 text-base font-medium text-gray-300 hover:text-fiery-500">Program Kerja</a>
+            <a href="#contact" class="block text-center w-full py-3 rounded-xl bg-gradient-to-r from-fiery-600 to-amberGlow-500 text-white font-bold">Aspirasi</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-28 pb-20 overflow-hidden z-10">
+        <!-- Floating Glows -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-fiery-600/15 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute top-1/3 left-1/3 w-[350px] h-[350px] bg-amberGlow-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div data-aos="fade-down" data-aos-duration="1000" class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-fiery-950/80 border border-fiery-800/60 shadow-lg mb-8 backdrop-blur-md">
+                <i data-lucide="sparkles" class="w-4 h-4 text-amberGlow-400 animate-pulse"></i>
+                <span class="text-xs sm:text-sm font-semibold tracking-wider text-fiery-200 uppercase">Masa Bakti 2026/2027 • SMAN 1 Wanasari</span>
+            </div>
+
+            <h1 data-aos="zoom-in" data-aos-duration="1200" class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-tight mb-6 uppercase">
+                OSIS <br class="hidden sm:block">
+                <span class="phoenix-gradient glow-text">PHOENIX</span>
+            </h1>
+
+            <p data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200" class="max-w-3xl mx-auto text-base sm:text-xl text-gray-300 font-medium leading-relaxed mb-10 tracking-wide">
+                "Bangkit, Bergerak, dan Membara Bersama Menuju Prestasi Tanpa Batas"
+            </p>
+
+            <div data-aos="fade-up" data-aos-duration="1200" data-aos-delay="400" class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#members" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-fiery-600 via-fiery-700 to-amberGlow-600 text-white font-bold text-base shadow-xl shadow-fiery-900/50 hover:brightness-110 active:scale-95 transition-all flex items-center justify-center space-x-3 glow-box">
+                    <span>Lihat Direktori Pengurus</span>
+                    <i data-lucide="users" class="w-5 h-5"></i>
+                </a>
+                <a href="#about" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gray-900/90 hover:bg-gray-800 border border-fiery-900/60 text-gray-200 font-bold text-base backdrop-blur-md transition-all flex items-center justify-center space-x-3">
+                    <i data-lucide="flame" class="w-5 h-5 text-fiery-500"></i>
+                    <span>Filosofi Kabinet</span>
+                </a>
+            </div>
+
+            <!-- Leader Highlight Quick Card -->
+            <div data-aos="zoom-in-up" data-aos-duration="1500" data-aos-delay="500" class="mt-16 relative max-w-lg mx-auto rounded-3xl overflow-hidden border border-fiery-800/40 glow-box bg-gray-950/80 p-6 backdrop-blur-md shadow-2xl text-left flex items-center space-x-5">
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-fiery-600 to-amberGlow-500 p-0.5 flex items-center justify-center glow-box shrink-0">
+                    <div class="w-full h-full bg-gray-950 rounded-[14px] flex items-center justify-center">
+                        <i data-lucide="crown" class="w-8 h-8 text-amberGlow-400"></i>
+                    </div>
+                </div>
+                <div>
+                    <span class="text-[10px] font-bold text-fiery-400 uppercase tracking-widest">Ketua OSIS Terpilih</span>
+                    <h3 class="text-lg font-black text-white">Tio Bakhtiar</h3>
+                    <p class="text-xs text-gray-400">Kelas XI.6 • 085799279433</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section / Filosofi Phoenix -->
+    <section id="about" class="py-24 relative z-10 bg-[#090508]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up" data-aos-duration="1000">
+                <span class="text-fiery-500 font-bold uppercase tracking-widest text-xs px-3 py-1 rounded-full bg-fiery-950/80 border border-fiery-900">Filosofi Pergerakan</span>
+                <h2 class="text-3xl sm:text-4xl font-black mt-4 mb-4 tracking-tight">Makna Suci Sang Phoenix</h2>
+                <p class="text-gray-400 text-base sm:text-lg">Burung Phoenix melambangkan ketangguhan abadi, semangat yang tak pernah padam dalam menghadapi ujian, serta sinar inovasi bagi SMAN 1 Wanasari.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100" class="p-8 rounded-2xl bg-gradient-to-b from-gray-900/90 to-gray-950 border border-fiery-950 glow-box relative group">
+                    <div class="w-14 h-14 rounded-xl bg-fiery-600/20 border border-fiery-500/30 flex items-center justify-center text-fiery-500 mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="zap" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-100">Kebangkitan Abadi</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Selalu siap bangkit dari setiap hambatan dengan energi baru yang lebih kuat, membimbing siswa untuk terus berinovasi dan berprestasi.
+                    </p>
+                </div>
+
+                <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200" class="p-8 rounded-2xl bg-gradient-to-b from-gray-900/90 to-gray-950 border border-fiery-950 glow-box relative group">
+                    <div class="w-14 h-14 rounded-xl bg-amberGlow-500/20 border border-amberGlow-500/30 flex items-center justify-center text-amberGlow-400 mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="shield" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-100">Loyalitas & Integritas</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Menjunjung tinggi nama baik almamater SMAN 1 Wanasari dengan dedikasi moral yang tinggi serta kerja sama tim yang solid.
+                    </p>
+                </div>
+
+                <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300" class="p-8 rounded-2xl bg-gradient-to-b from-gray-900/90 to-gray-950 border border-fiery-950 glow-box relative group">
+                    <div class="w-14 h-14 rounded-xl bg-rose-600/20 border border-rose-500/30 flex items-center justify-center text-rose-500 mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="lightbulb" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-100">Inovasi Modern</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Mewujudkan program kerja OSIS yang dinamis, kreatif, serta adaptif terhadap perkembangan teknologi dan kebutuhan siswa masa kini.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Badan Pengurus Harian (BPH) Section -->
+    <section id="bph" class="py-24 relative z-10 bg-gradient-to-b from-[#090508] to-[#12080f]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up" data-aos-duration="1000">
+                <span class="text-fiery-500 font-bold uppercase tracking-widest text-xs px-3 py-1 rounded-full bg-fiery-950/80 border border-fiery-900">Inti Pimpinan</span>
+                <h2 class="text-3xl sm:text-4xl font-black mt-4 mb-4 tracking-tight">Badan Pengurus Harian (BPH)</h2>
+                <p class="text-gray-400 text-base sm:text-lg">Pimpinan utama penggerak seluruh kegiatan dan administrasi OSIS SMAN 1 Wanasari.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Ketua -->
+                <div data-aos="zoom-in" data-aos-duration="800" data-aos-delay="100" class="bg-gray-900/80 border border-fiery-950 rounded-2xl p-6 glow-box text-center flex flex-col justify-between">
+                    <div>
+                        <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-fiery-600 to-amberGlow-500 flex items-center justify-center text-white mb-4 glow-box">
+                            <i data-lucide="user" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Tio Bakhtiar</h3>
+                        <p class="text-fiery-500 text-xs font-semibold uppercase tracking-wider mb-2">Ketua OSIS</p>
+                        <p class="text-xs text-gray-400 mb-1">Kelas: XI.6</p>
+                        <p class="text-xs text-gray-400 mb-1">Asal: Petunjungan</p>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-800 text-xs text-amberGlow-400 font-mono">
+                        <i data-lucide="phone" class="w-3 h-3 inline mr-1"></i>085799279433
+                    </div>
+                </div>
+
+                <!-- Wakil Ketua -->
+                <div data-aos="zoom-in" data-aos-duration="800" data-aos-delay="200" class="bg-gray-900/80 border border-fiery-950 rounded-2xl p-6 glow-box text-center flex flex-col justify-between">
+                    <div>
+                        <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-fiery-600 to-amberGlow-500 flex items-center justify-center text-white mb-4 glow-box">
+                            <i data-lucide="user" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Irzanisa Mutia Sari</h3>
+                        <p class="text-fiery-500 text-xs font-semibold uppercase tracking-wider mb-2">Wakil Ketua OSIS</p>
+                        <p class="text-xs text-gray-400 mb-1">Kelas: XI.6</p>
+                        <p class="text-xs text-gray-400 mb-1">Asal: Sigentong</p>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-800 text-xs text-amberGlow-400 font-mono">
+                        <i data-lucide="phone" class="w-3 h-3 inline mr-1"></i>083846512088
+                    </div>
+                </div>
+
+                <!-- Sekretaris -->
+                <div data-aos="zoom-in" data-aos-duration="800" data-aos-delay="300" class="bg-gray-900/80 border border-fiery-950 rounded-2xl p-6 glow-box text-center flex flex-col justify-between">
+                    <div>
+                        <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-fiery-600 to-amberGlow-500 flex items-center justify-center text-white mb-4 glow-box">
+                            <i data-lucide="user" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Erni Herlina</h3>
+                        <p class="text-fiery-500 text-xs font-semibold uppercase tracking-wider mb-2">Sekretaris</p>
+                        <p class="text-xs text-gray-400 mb-1">Kelas: XI.3</p>
+                        <p class="text-xs text-gray-400 mb-1">Asal: Sisalam</p>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-800 text-xs text-amberGlow-400 font-mono">
+                        <i data-lucide="phone" class="w-3 h-3 inline mr-1"></i>083123593614
+                    </div>
+                </div>
+
+                <!-- Bendahara -->
+                <div data-aos="zoom-in" data-aos-duration="800" data-aos-delay="400" class="bg-gray-900/80 border border-fiery-950 rounded-2xl p-6 glow-box text-center flex flex-col justify-between">
+                    <div>
+                        <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-fiery-600 to-amberGlow-500 flex items-center justify-center text-white mb-4 glow-box">
+                            <i data-lucide="user" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Wisci Tri Amelia</h3>
+                        <p class="text-fiery-500 text-xs font-semibold uppercase tracking-wider mb-2">Bendahara</p>
+                        <p class="text-xs text-gray-400 mb-1">Kelas: XI.6</p>
+                        <p class="text-xs text-gray-400 mb-1">Asal: Dukuhringin</p>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-800 text-xs text-amberGlow-400 font-mono">
+                        <i data-lucide="phone" class="w-3 h-3 inline mr-1"></i>085643000455
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Full Member Directory Section -->
+    <section id="members" class="py-24 relative z-10 bg-[#070306]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up" data-aos-duration="1000">
+                <span class="text-fiery-500 font-bold uppercase tracking-widest text-xs px-3 py-1 rounded-full bg-fiery-950/80 border border-fiery-900">Database Anggota</span>
+                <h2 class="text-3xl sm:text-4xl font-black mt-4 mb-4 tracking-tight">Direktori Lengkap Pengurus OSIS</h2>
+                <p class="text-gray-400 text-base sm:text-lg">Daftar seluruh pengurus seksi bidang dan anggota OSIS SMAN 1 Wanasari Masa Bakti 2026/2027.</p>
+            </div>
+
+            <!-- Search and Filter Bar -->
+            <div class="max-w-xl mx-auto mb-12" data-aos="fade-up" data-aos-duration="800">
+                <div class="relative">
+                    <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"></i>
+                    <input type="text" id="searchInput" placeholder="Cari nama pengurus, jabatan, atau asal daerah..." class="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-gray-900/90 border border-fiery-950 text-white placeholder-gray-500 focus:outline-none focus:border-fiery-500 transition-colors shadow-lg">
+                </div>
+            </div>
+
+            <!-- Member Cards Grid -->
+            <div id="memberGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Member 1 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Tio Bakhtiar" data-role="Ketua OSIS" data-region="Petunjungan">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Ketua OSIS</span>
+                            <span class="text-xs text-gray-400 font-mono">XI.6</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Tio Bakhtiar</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Petunjungan</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:085799279433" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>085799279433</a>
+                    </div>
+                </div>
+
+                <!-- Member 2 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Irzanisa Mutia Sari" data-role="Wakil Ketua OSIS" data-region="Sigentong">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Wakil Ketua</span>
+                            <span class="text-xs text-gray-400 font-mono">XI.6</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Irzanisa Mutia Sari</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Sigentong</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:083846512088" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>083846512088</a>
+                    </div>
+                </div>
+
+                <!-- Member 3 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Erni Herlina" data-role="Sie Sekretaris" data-region="Sisalam">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. Sekretaris</span>
+                            <span class="text-xs text-gray-400 font-mono">XI.3</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Erni Herlina</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Sisalam</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:083123593614" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>083123593614</a>
+                    </div>
+                </div>
+
+                <!-- Member 4 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Gemilang Anugerah Z" data-role="Sie Sekretaris" data-region="Banjaratma">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. Sekretaris</span>
+                            <span class="text-xs text-gray-400 font-mono">X.4</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Gemilang Anugerah Z.</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Banjaratma</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:085702885230" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>085702885230</a>
+                    </div>
+                </div>
+
+                <!-- Member 5 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Wisci Tri Amelia" data-role="Sie Bendahara" data-region="Dukuhringin">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. Bendahara</span>
+                            <span class="text-xs text-gray-400 font-mono">XI.6</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Wisci Tri Amelia</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Dukuhringin</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:085643000455" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>085643000455</a>
+                    </div>
+                </div>
+
+                <!-- Member 6 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Fatimah Nur Zahra" data-role="Sie Bendahara" data-region="Tanjungsari">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. Bendahara</span>
+                            <span class="text-xs text-gray-400 font-mono">X.5</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Fatimah Nur Zahra</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Tanjungsari</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:085712700875" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>085712700875</a>
+                    </div>
+                </div>
+
+                <!-- Member 7 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Rizqy Maftukhin" data-role="Sie Imtaq" data-region="Tegal Gandu">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. Imtaq</span>
+                            <span class="text-xs text-gray-400 font-mono">XI.3</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Rizqy Maftukhin</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Tegal Gandu</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:0895379218024" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>0895379218024</a>
+                    </div>
+                </div>
+
+                <!-- Member 8 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Embun Kirani Paujiah" data-role="Sie Imtaq" data-region="Dukuhwringin">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. Imtaq</span>
+                            <span class="text-xs text-gray-400 font-mono">X.3</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Embun Kirani Paujiah</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Dukuhwringin</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:083869992295" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>0838-6999-2295</a>
+                    </div>
+                </div>
+
+                <!-- Member 9 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Safia Putri Salsabila" data-role="Sie Imtaq" data-region="Sisalam">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. Imtaq</span>
+                            <span class="text-xs text-gray-400 font-mono">X.2</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Safia Putri Salsabila</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Sisalam</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:081902261113" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>081902261113</a>
+                    </div>
+                </div>
+
+                <!-- Member 10 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Siti Nur Khafizah" data-role="Sie Budi Pekerti Luhur" data-region="Tanjung Sari">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. Budi Pekerti</span>
+                            <span class="text-xs text-gray-400 font-mono">XI.7</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Siti Nur Khafizah</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Tanjung Sari</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:085702536992" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>085702536992</a>
+                    </div>
+                </div>
+
+                <!-- Member 11 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Muhammad Al Idrus" data-role="Sie Budi Pekerti Luhur" data-region="Jagalempeni">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. Budi Pekerti</span>
+                            <span class="text-xs text-gray-400 font-mono">XI.4</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Muhammad Al Idrus</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Jagalempeni</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:082225858027" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>082225858027</a>
+                    </div>
+                </div>
+
+                <!-- Member 12 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Ulfi Amalia" data-role="Sie Budi Pekerti Luhur" data-region="Tanjung Sari">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. Budi Pekerti</span>
+                            <span class="text-xs text-gray-400 font-mono">X.2</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Ulfi Amalia</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Tanjung Sari</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:085741158671" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>085741158671</a>
+                    </div>
+                </div>
+
+                <!-- Member 13 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Surya Irham Ramadhan" data-role="Sie Bela Negara" data-region="Sigentong">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. Bela Negara</span>
+                            <span class="text-xs text-gray-400 font-mono">XI.3</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Surya Irham Ramadhan</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Sigentong</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:082210188673" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>082210188673</a>
+                    </div>
+                </div>
+
+                <!-- Member 14 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Muhammad Daffa Ayattul H" data-role="Sie Bela Negara" data-region="Dusun Kedawon">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. Bela Negara</span>
+                            <span class="text-xs text-gray-400 font-mono">X.6</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Muhammad Daffa Ayattul H.</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Dusun Kedawon</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:083861301912" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>083861301912</a>
+                    </div>
+                </div>
+
+                <!-- Member 15 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Zulfayun Ni'mah" data-role="Sie Bela Negara" data-region="Dukuh Kedawon">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. Bela Negara</span>
+                            <span class="text-xs text-gray-400 font-mono">X.4</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Zulfayun Ni'mah</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Dukuh Kedawon</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:083897831941" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>083897831941</a>
+                    </div>
+                </div>
+
+                <!-- Member 16 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Ahmad Royan Maulana" data-role="Sie Akademik & Non-Akademik" data-region="Tanjung Sari">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. Akademik</span>
+                            <span class="text-xs text-gray-400 font-mono">XI.6</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Ahmad Royan Maulana</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Tanjung Sari</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:081326387878" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>081326387878</a>
+                    </div>
+                </div>
+
+                <!-- Member 17 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Ahmad Ali Rosidin" data-role="Sie Akademik & Non-Akademik" data-region="Bajaratma">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. Akademik</span>
+                            <span class="text-xs text-gray-400 font-mono">XI.5</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Ahmad Ali Rosidin</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Bajaratma</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:089514727061" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>089514727061</a>
+                    </div>
+                </div>
+
+                <!-- Member 18 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Khadijah" data-role="Sie Akademik & Non-Akademik" data-region="Siwungkuk">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. Akademik</span>
+                            <span class="text-xs text-gray-400 font-mono">X.2</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Khadijah</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Siwungkuk</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:083157217412" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>083157217412</a>
+                    </div>
+                </div>
+
+                <!-- Member 19 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Dwi Desi Arifatun" data-role="Sie Demokrasi HAM" data-region="Sigentong">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. Demokrasi HAM</span>
+                            <span class="text-xs text-gray-400 font-mono">XI.1</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Dwi Desi Arifatun</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Sigentong</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:085712436813" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>085712436813</a>
+                    </div>
+                </div>
+
+                <!-- Member 20 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Keylla Dewi Angraini" data-role="Sie Demokrasi HAM" data-region="Dusun Lamaran">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. Demokrasi HAM</span>
+                            <span class="text-xs text-gray-400 font-mono">X.6</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Keylla Dewi Angraini</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Dusun Lamaran</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:087767415095" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>087767415095</a>
+                    </div>
+                </div>
+
+                <!-- Member 21 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Azahwa Salsabillah A" data-role="Sie Demokrasi HAM" data-region="Tanjungsari">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. Demokrasi HAM</span>
+                            <span class="text-xs text-gray-400 font-mono">X.2</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Azahwa Salsabillah A.</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Tanjungsari</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:082298228993" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>082298228993</a>
+                    </div>
+                </div>
+
+                <!-- Member 22 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Yosef Arkham Mujami" data-role="Sie Kreativitas" data-region="Kedawon">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. Kreativitas</span>
+                            <span class="text-xs text-gray-400 font-mono">XI.6</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Yosef Arkham Mujami</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Kedawon</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:083847064157" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>083847064157</a>
+                    </div>
+                </div>
+
+                <!-- Member 23 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Hairani Yumna Hernisa S" data-role="Sie Kreativitas" data-region="Petunjungan">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. Kreativitas</span>
+                            <span class="text-xs text-gray-400 font-mono">X.7</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Hairani Yumna Hernisa S.</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Petunjungan</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:085729455107" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>085729455107</a>
+                    </div>
+                </div>
+
+                <!-- Member 24 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Revilia Agustin" data-role="Sie Sastra & Budaya" data-region="Sigedeg">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. Sastra & Budaya</span>
+                            <span class="text-xs text-gray-400 font-mono">XI.3</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Revilia Agustin</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Sigedeg</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:085624108970" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>085624108970</a>
+                    </div>
+                </div>
+
+                <!-- Member 25 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Mohamad Refa" data-role="Sie Sastra & Budaya" data-region="Sisalam">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. Sastra & Budaya</span>
+                            <span class="text-xs text-gray-400 font-mono">X.2</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Mohamad Refa</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Sisalam</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:083191527699" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>083191527699</a>
+                    </div>
+                </div>
+
+                <!-- Member 26 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Devita Eka Cahyati" data-role="Sie Gizi & Kesehatan" data-region="Dukuhringin">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. Gizi & Kesehatan</span>
+                            <span class="text-xs text-gray-400 font-mono">XI.2</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Devita Eka Cahyati</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Dukuhringin</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:085712026045" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>085712026045</a>
+                    </div>
+                </div>
+
+                <!-- Member 27 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Nasya Inayatun Safinah" data-role="Sie Gizi & Kesehatan" data-region="Sidamulya">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. Gizi & Kesehatan</span>
+                            <span class="text-xs text-gray-400 font-mono">X.4</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Nasya Inayatun Safinah</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Sidamulya</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:085877351528" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>085877351528</a>
+                    </div>
+                </div>
+
+                <!-- Member 28 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Anggun Almadinara S" data-role="Sie TIK" data-region="Wanasari">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. TIK</span>
+                            <span class="text-xs text-gray-400 font-mono">XI.7</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Anggun Almadinara S.</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Wanasari</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:089654267216" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>089654267216</a>
+                    </div>
+                </div>
+
+                <!-- Member 29 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Firna Septiani Putri" data-role="Sie TIK" data-region="Lamaran">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. TIK</span>
+                            <span class="text-xs text-gray-400 font-mono">X.4</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Firna Septiani Putri</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Lamaran</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:085353414330" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>085353414330</a>
+                    </div>
+                </div>
+
+                <!-- Member 30 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Yudha Kurnia Erdiansyah" data-role="Sie TIK" data-region="Lengkong">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. TIK</span>
+                            <span class="text-xs text-gray-400 font-mono">X.1</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Yudha Kurnia Erdiansyah</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Lengkong</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:081392148892" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>081392148892</a>
+                    </div>
+                </div>
+
+                <!-- Member 31 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Syasila Meyfani" data-role="Sie B.Jawa & B.Inggris" data-region="Pagugugan">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. Bahasa</span>
+                            <span class="text-xs text-gray-400 font-mono">XI.2</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Syasila Meyfani</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Pagugugan</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:089509617138" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>089509617138</a>
+                    </div>
+                </div>
+
+                <!-- Member 32 -->
+                <div class="member-card bg-gray-900/80 border border-fiery-950/80 rounded-2xl p-6 glow-box flex flex-col justify-between" data-name="Ayesha Salvia Utami" data-role="Sie B.Jawa & B.Inggris" data-region="Sawojajar">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-fiery-950 text-fiery-400 border border-fiery-900">Sie. Bahasa</span>
+                            <span class="text-xs text-gray-400 font-mono">X.5</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1">Ayesha Salvia Utami</h3>
+                        <p class="text-xs text-gray-400 flex items-center mb-4"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1 text-fiery-500"></i>Sawojajar</p>
+                    </div>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-300">
+                        <span class="text-gray-500">Kontak:</span>
+                        <a href="tel:0882007675579" class="text-amberGlow-400 font-mono hover:underline flex items-center"><i data-lucide="phone" class="w-3.5 h-3.5 mr-1"></i>0882007675579</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- No results message -->
+            <div id="noResults" class="hidden text-center py-12 text-gray-400">
+                <i data-lucide="search-x" class="w-12 h-12 mx-auto mb-3 text-fiery-600"></i>
+                <p>Tidak ditemukan pengurus dengan kata kunci tersebut.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Kerja Section -->
+    <section id="programs" class="py-24 relative z-10 bg-gradient-to-b from-[#070306] to-[#090508]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up" data-aos-duration="1000">
+                <span class="text-fiery-500 font-bold uppercase tracking-widest text-xs px-3 py-1 rounded-full bg-fiery-950/80 border border-fiery-900">Agenda Kegiatan</span>
+                <h2 class="text-3xl sm:text-4xl font-black mt-4 mb-4 tracking-tight">Program Kerja Unggulan</h2>
+                <p class="text-gray-400 text-base sm:text-lg">Rangkaian program kerja berorientasi pengembangan potensi dan karakter siswa SMAN 1 Wanasari.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-gray-900/80 border border-fiery-950 rounded-2xl p-6 glow-box">
+                    <div class="w-12 h-12 rounded-xl bg-fiery-600/20 text-fiery-500 flex items-center justify-center mb-4 font-bold">01</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Wanasari Science & Arts Olympiad</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Kompetisi bidang akademik, sains, seni dan budaya untuk mengasah bakat unggul siswa.</p>
+                </div>
+                <div class="bg-gray-900/80 border border-fiery-950 rounded-2xl p-6 glow-box">
+                    <div class="w-12 h-12 rounded-xl bg-amberGlow-500/20 text-amberGlow-400 flex items-center justify-center mb-4 font-bold">02</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Phoenix Cup Sports League</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Turnamen olahraga antar kelas guna mempererat sportivitas dan solidaritas pelajar.</p>
+                </div>
+                <div class="bg-gray-900/80 border border-fiery-950 rounded-2xl p-6 glow-box">
+                    <div class="w-12 h-12 rounded-xl bg-rose-600/20 text-rose-500 flex items-center justify-center mb-4 font-bold">03</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Green School & Social Action</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Aksi bakti sosial kepedulian masyarakat serta gerakan penghijauan lingkungan sekolah.</p>
+                </div>
+                <div class="bg-gray-900/80 border border-fiery-950 rounded-2xl p-6 glow-box">
+                    <div class="w-12 h-12 rounded-xl bg-amberGlow-500/20 text-amberGlow-400 flex items-center justify-center mb-4 font-bold">04</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Leadership & LDKS</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Pelatihan dasar kepemimpinan untuk melahirkan generasi pengurus OSIS yang tangguh.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kotak Aspirasi Siswa -->
+    <section id="contact" class="py-24 relative z-10 bg-[#070306]">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up" data-aos-duration="1000">
+                <span class="text-fiery-500 font-bold uppercase tracking-widest text-xs px-3 py-1 rounded-full bg-fiery-950/80 border border-fiery-900">Suara Anda Berarti</span>
+                <h2 class="text-3xl sm:text-4xl font-black mt-4 mb-4 tracking-tight">Kotak Aspirasi Siswa</h2>
+                <p class="text-gray-400 text-base sm:text-lg">Sampaikan kritik, saran, maupun masukan konstruktif untuk kemajuan OSIS SMAN 1 Wanasari.</p>
+            </div>
+
+            <div data-aos="zoom-in-up" data-aos-duration="1000" class="bg-gradient-to-b from-gray-900/90 to-gray-950 border border-fiery-950 rounded-3xl p-8 sm:p-12 glow-box relative">
+                <div id="formNotification" class="hidden mb-6 p-4 rounded-xl bg-fiery-950 border border-fiery-600 text-fiery-200 text-sm flex items-center space-x-3">
+                    <i data-lucide="check-circle" class="w-5 h-5 text-fiery-500 shrink-0"></i>
+                    <span>Terima kasih! Aspirasi Anda berhasil terkirim kepada pengurus OSIS.</span>
+                </div>
+
+                <form id="aspirasiForm" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-300 mb-2">Nama Lengkap</label>
+                            <input type="text" required class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-800 text-white focus:outline-none focus:border-fiery-500 transition-colors" placeholder="Masukkan nama Anda">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-300 mb-2">Kelas</label>
+                            <input type="text" required class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-800 text-white focus:outline-none focus:border-fiery-500 transition-colors" placeholder="Contoh: XI MIPA 1">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">Kategori Aspirasi</label>
+                        <select class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-800 text-white focus:outline-none focus:border-fiery-500 transition-colors">
+                            <option value="Saran Program">Saran & Ide Program Kerja</option>
+                            <option value="Fasilitas">Fasilitas & Sarana Prasarana</option>
+                            <option value="Ekstrakulikuler">Kegiatan / Ekstrakulikuler</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">Pesan / Aspirasi</label>
+                        <textarea rows="4" required class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-800 text-white focus:outline-none focus:border-fiery-500 transition-colors" placeholder="Tuliskan pesan atau masukan Anda..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-fiery-600 via-fiery-700 to-amberGlow-600 text-white font-bold text-base shadow-xl shadow-fiery-900/50 hover:brightness-110 active:scale-95 transition-all flex items-center justify-center space-x-2">
+                        <i data-lucide="send" class="w-5 h-5"></i>
+                        <span>Kirim Aspirasi</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 border-t border-fiery-950 pt-16 pb-12 relative z-10 text-gray-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-fiery-600 to-amberGlow-500 flex items-center justify-center glow-box">
+                            <i data-lucide="flame" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <span class="text-lg font-black tracking-wider text-white">OSIS SMAN 1 WANASARI</span>
+                    </div>
+                    <p class="text-sm leading-relaxed text-gray-400">
+                        Kabinet Phoenix - Membawa semangat baru yang membara dalam memajukan prestasi, kedisiplinan, dan kreativitas siswa di Kabupaten Brebes.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold text-sm tracking-wider uppercase mb-4">Navigasi Utama</h4>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="#home" class="hover:text-fiery-500 transition-colors">Beranda</a></li>
+                        <li><a href="#about" class="hover:text-fiery-500 transition-colors">Filosofi Phoenix</a></li>
+                        <li><a href="#bph" class="hover:text-fiery-500 transition-colors">BPH Inti</a></li>
+                        <li><a href="#members" class="hover:text-fiery-500 transition-colors">Direktori Pengurus</a></li>
+                        <li><a href="#programs" class="hover:text-fiery-500 transition-colors">Program Kerja</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold text-sm tracking-wider uppercase mb-4">Sekretariat</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start space-x-3">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-fiery-500 shrink-0 mt-0.5"></i>
+                            <span>Jl. Raya Wanasari No. 1, Kab. Brebes, Jawa Tengah 52252</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i data-lucide="mail" class="w-5 h-5 text-fiery-500 shrink-0"></i>
+                            <span>osis@sman1wanasari.sch.id</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-900 pt-8 text-center text-xs text-gray-500">
+                <p>&copy; 2026 OSIS SMAN 1 Wanasari. All rights reserved. Kabinet Phoenix.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        lucide.createIcons();
+
+        AOS.init({
+            once: true,
+            offset: 80,
+            duration: 800,
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-[#090508]/95', 'shadow-lg');
+            } else {
+                navbar.classList.remove('bg-[#090508]/95', 'shadow-lg');
+            }
+        });
+
+        // Search Directory Filter
+        const searchInput = document.getElementById('searchInput');
+        const memberCards = document.querySelectorAll('.member-card');
+        const noResults = document.getElementById('noResults');
+
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            let count = 0;
+
+            memberCards.forEach(card => {
+                const name = card.getAttribute('data-name').toLowerCase();
+                const role = card.getAttribute('data-role').toLowerCase();
+                const region = card.getAttribute('data-region').toLowerCase();
+
+                if (name.includes(term) || role.includes(term) || region.includes(term)) {
+                    card.style.display = 'flex';
+                    count++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (count === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        });
+
+        // Form Submission
+        const aspirasiForm = document.getElementById('aspirasiForm');
+        const formNotification = document.getElementById('formNotification');
+        aspirasiForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            formNotification.classList.remove('hidden');
+            aspirasiForm.reset();
+            setTimeout(() => {
+                formNotification.classList.add('hidden');
+            }, 6000);
+        });
+
+        // Canvas Fire Particle Animation
+        const canvas = document.getElementById('fireCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const particles = [];
+        const particleCount = Math.min(window.innerWidth > 768 ? 50 : 25, 60);
+
+        class EmberParticle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + Math.random() * 100;
+                this.size = Math.random() * 3 + 1;
+                this.speedY = Math.random() * -1.5 - 0.8;
+                this.speedX = (Math.random() - 0.5) * 1;
+                this.life = Math.random() * 150 + 50;
+                this.maxLife = this.life;
+                const colors = ['#f43f5e', '#f59e0b', '#fbbf24', '#e11d48'];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX + Math.sin(this.y * 0.02) * 0.4;
+                this.life--;
+                if (this.life <= 0 || this.y < -10) {
+                    this.reset();
+                }
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.life / this.maxLife;
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new EmberParticle());
+        }
+
+        function animateFire() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateFire);
+        }
+        animateFire();
+    </script>
+</body>
+</html>

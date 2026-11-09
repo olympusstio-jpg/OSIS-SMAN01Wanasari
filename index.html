@@ -99,9 +99,7 @@
             <div class="flex items-center justify-between h-20">
                 <!-- Logo & School Name -->
                 <a href="#home" class="flex items-center space-x-3 group">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-fiery-600 to-amberGlow-500 flex items-center justify-center glow-box group-hover:scale-105 transition-transform">
-                        <i data-lucide="flame" class="w-6 h-6 text-white"></i>
-                    </div>
+                
                     <div>
                         <span class="text-base sm:text-lg font-black tracking-wider phoenix-gradient">OSIS SMAN 1 WANASARI</span>
                         <p class="text-[10px] text-gray-400 font-medium tracking-widest uppercase">Kepengurusan 2026/2027</p>
@@ -112,7 +110,7 @@
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#home" class="text-sm font-semibold text-gray-300 hover:text-fiery-500 transition-colors">Beranda</a>
                     <a href="#about" class="text-sm font-semibold text-gray-300 hover:text-fiery-500 transition-colors">Filosofi</a>
-                    <a href="#bph" class="text-sm font-semibold text-gray-300 hover:text-fiery-500 transition-colors">BPH</a>
+                    
                     <a href="#members" class="text-sm font-semibold text-gray-300 hover:text-fiery-500 transition-colors">Direktori Pengurus</a>
                     <a href="#programs" class="text-sm font-semibold text-gray-300 hover:text-fiery-500 transition-colors">Program Kerja</a>
                     <a href="#contact" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-fiery-600 to-amberGlow-500 text-white text-sm font-bold shadow-lg shadow-fiery-900/40 hover:brightness-110 active:scale-95 transition-all">Aspirasi</a>
@@ -140,6 +138,8 @@
 
     <!-- Hero Section -->
     <section id="home" class="relative min-h-screen flex items-center justify-center pt-28 pb-20 overflow-hidden z-10">
+      <img src="/sampul.jpg" class="absolute inset-0 w-full h-full object-cover opacity-70">
+<div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-[#070306]"></div>
         <!-- Floating Glows -->
         <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-fiery-600/15 rounded-full blur-[120px] pointer-events-none"></div>
         <div class="absolute top-1/3 left-1/3 w-[350px] h-[350px] bg-amberGlow-500/10 rounded-full blur-[100px] pointer-events-none"></div>
@@ -147,11 +147,11 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <div data-aos="fade-down" data-aos-duration="1000" class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-fiery-950/80 border border-fiery-800/60 shadow-lg mb-8 backdrop-blur-md">
                 <i data-lucide="sparkles" class="w-4 h-4 text-amberGlow-400 animate-pulse"></i>
-                <span class="text-xs sm:text-sm font-semibold tracking-wider text-fiery-200 uppercase">Masa Bakti 2026/2027 • SMAN 1 Wanasari</span>
+                <span class="text-xs sm:text-sm font-semibold tracking-wider text-fiery-200 uppercase">Masa Bakti 2026/2027</span>
             </div>
 
             <h1 data-aos="zoom-in" data-aos-duration="1200" class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-tight mb-6 uppercase">
-                OSIS <br class="hidden sm:block">
+                OSIS SMAN 01 WANASARI <br class="hidden sm:block">
                 <span class="phoenix-gradient glow-text">PHOENIX</span>
             </h1>
 
@@ -188,6 +188,13 @@
 
     <!-- About Section / Filosofi Phoenix -->
     <section id="about" class="py-24 relative z-10 bg-[#090508]">
+      <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-50">
+  <source src="/phoenix.mp4" type="video/mp4">
+</video>
+<div class="absolute inset-0 bg-black/60"></div>
+      <button onclick="let v=this.closest('section').querySelector('video'); v.muted=!v.muted; this.innerText=v.muted?'🔇 Nyalakan Suara':'🔊 Matikan Suara'" class="absolute top-4 right-4 z-20 bg-black/50 text-white px-3 py-2 rounded-full text-xs">
+  🔇 Nyalakan Suara
+</button>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up" data-aos-duration="1000">
                 <span class="text-fiery-500 font-bold uppercase tracking-widest text-xs px-3 py-1 rounded-full bg-fiery-950/80 border border-fiery-900">Filosofi Pergerakan</span>
@@ -195,117 +202,11 @@
                 <p class="text-gray-400 text-base sm:text-lg">Burung Phoenix melambangkan ketangguhan abadi, semangat yang tak pernah padam dalam menghadapi ujian, serta sinar inovasi bagi SMAN 1 Wanasari.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100" class="p-8 rounded-2xl bg-gradient-to-b from-gray-900/90 to-gray-950 border border-fiery-950 glow-box relative group">
-                    <div class="w-14 h-14 rounded-xl bg-fiery-600/20 border border-fiery-500/30 flex items-center justify-center text-fiery-500 mb-6 group-hover:scale-110 transition-transform">
-                        <i data-lucide="zap" class="w-7 h-7"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-gray-100">Kebangkitan Abadi</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Selalu siap bangkit dari setiap hambatan dengan energi baru yang lebih kuat, membimbing siswa untuk terus berinovasi dan berprestasi.
-                    </p>
-                </div>
-
-                <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200" class="p-8 rounded-2xl bg-gradient-to-b from-gray-900/90 to-gray-950 border border-fiery-950 glow-box relative group">
-                    <div class="w-14 h-14 rounded-xl bg-amberGlow-500/20 border border-amberGlow-500/30 flex items-center justify-center text-amberGlow-400 mb-6 group-hover:scale-110 transition-transform">
-                        <i data-lucide="shield" class="w-7 h-7"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-gray-100">Loyalitas & Integritas</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Menjunjung tinggi nama baik almamater SMAN 1 Wanasari dengan dedikasi moral yang tinggi serta kerja sama tim yang solid.
-                    </p>
-                </div>
-
-                <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300" class="p-8 rounded-2xl bg-gradient-to-b from-gray-900/90 to-gray-950 border border-fiery-950 glow-box relative group">
-                    <div class="w-14 h-14 rounded-xl bg-rose-600/20 border border-rose-500/30 flex items-center justify-center text-rose-500 mb-6 group-hover:scale-110 transition-transform">
-                        <i data-lucide="lightbulb" class="w-7 h-7"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-gray-100">Inovasi Modern</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Mewujudkan program kerja OSIS yang dinamis, kreatif, serta adaptif terhadap perkembangan teknologi dan kebutuhan siswa masa kini.
-                    </p>
-                </div>
-            </div>
-        </div>
+            
+                <
     </section>
 
-    <!-- Badan Pengurus Harian (BPH) Section -->
-    <section id="bph" class="py-24 relative z-10 bg-gradient-to-b from-[#090508] to-[#12080f]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up" data-aos-duration="1000">
-                <span class="text-fiery-500 font-bold uppercase tracking-widest text-xs px-3 py-1 rounded-full bg-fiery-950/80 border border-fiery-900">Inti Pimpinan</span>
-                <h2 class="text-3xl sm:text-4xl font-black mt-4 mb-4 tracking-tight">Badan Pengurus Harian (BPH)</h2>
-                <p class="text-gray-400 text-base sm:text-lg">Pimpinan utama penggerak seluruh kegiatan dan administrasi OSIS SMAN 1 Wanasari.</p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Ketua -->
-                <div data-aos="zoom-in" data-aos-duration="800" data-aos-delay="100" class="bg-gray-900/80 border border-fiery-950 rounded-2xl p-6 glow-box text-center flex flex-col justify-between">
-                    <div>
-                        <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-fiery-600 to-amberGlow-500 flex items-center justify-center text-white mb-4 glow-box">
-                            <i data-lucide="user" class="w-8 h-8"></i>
-                        </div>
-                        <h3 class="text-lg font-bold text-white mb-1">Tio Bakhtiar</h3>
-                        <p class="text-fiery-500 text-xs font-semibold uppercase tracking-wider mb-2">Ketua OSIS</p>
-                        <p class="text-xs text-gray-400 mb-1">Kelas: XI.6</p>
-                        <p class="text-xs text-gray-400 mb-1">Asal: Petunjungan</p>
-                    </div>
-                    <div class="mt-4 pt-4 border-t border-gray-800 text-xs text-amberGlow-400 font-mono">
-                        <i data-lucide="phone" class="w-3 h-3 inline mr-1"></i>085799279433
-                    </div>
-                </div>
-
-                <!-- Wakil Ketua -->
-                <div data-aos="zoom-in" data-aos-duration="800" data-aos-delay="200" class="bg-gray-900/80 border border-fiery-950 rounded-2xl p-6 glow-box text-center flex flex-col justify-between">
-                    <div>
-                        <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-fiery-600 to-amberGlow-500 flex items-center justify-center text-white mb-4 glow-box">
-                            <i data-lucide="user" class="w-8 h-8"></i>
-                        </div>
-                        <h3 class="text-lg font-bold text-white mb-1">Irzanisa Mutia Sari</h3>
-                        <p class="text-fiery-500 text-xs font-semibold uppercase tracking-wider mb-2">Wakil Ketua OSIS</p>
-                        <p class="text-xs text-gray-400 mb-1">Kelas: XI.6</p>
-                        <p class="text-xs text-gray-400 mb-1">Asal: Sigentong</p>
-                    </div>
-                    <div class="mt-4 pt-4 border-t border-gray-800 text-xs text-amberGlow-400 font-mono">
-                        <i data-lucide="phone" class="w-3 h-3 inline mr-1"></i>083846512088
-                    </div>
-                </div>
-
-                <!-- Sekretaris -->
-                <div data-aos="zoom-in" data-aos-duration="800" data-aos-delay="300" class="bg-gray-900/80 border border-fiery-950 rounded-2xl p-6 glow-box text-center flex flex-col justify-between">
-                    <div>
-                        <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-fiery-600 to-amberGlow-500 flex items-center justify-center text-white mb-4 glow-box">
-                            <i data-lucide="user" class="w-8 h-8"></i>
-                        </div>
-                        <h3 class="text-lg font-bold text-white mb-1">Erni Herlina</h3>
-                        <p class="text-fiery-500 text-xs font-semibold uppercase tracking-wider mb-2">Sekretaris</p>
-                        <p class="text-xs text-gray-400 mb-1">Kelas: XI.3</p>
-                        <p class="text-xs text-gray-400 mb-1">Asal: Sisalam</p>
-                    </div>
-                    <div class="mt-4 pt-4 border-t border-gray-800 text-xs text-amberGlow-400 font-mono">
-                        <i data-lucide="phone" class="w-3 h-3 inline mr-1"></i>083123593614
-                    </div>
-                </div>
-
-                <!-- Bendahara -->
-                <div data-aos="zoom-in" data-aos-duration="800" data-aos-delay="400" class="bg-gray-900/80 border border-fiery-950 rounded-2xl p-6 glow-box text-center flex flex-col justify-between">
-                    <div>
-                        <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-fiery-600 to-amberGlow-500 flex items-center justify-center text-white mb-4 glow-box">
-                            <i data-lucide="user" class="w-8 h-8"></i>
-                        </div>
-                        <h3 class="text-lg font-bold text-white mb-1">Wisci Tri Amelia</h3>
-                        <p class="text-fiery-500 text-xs font-semibold uppercase tracking-wider mb-2">Bendahara</p>
-                        <p class="text-xs text-gray-400 mb-1">Kelas: XI.6</p>
-                        <p class="text-xs text-gray-400 mb-1">Asal: Dukuhringin</p>
-                    </div>
-                    <div class="mt-4 pt-4 border-t border-gray-800 text-xs text-amberGlow-400 font-mono">
-                        <i data-lucide="phone" class="w-3 h-3 inline mr-1"></i>085643000455
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
+   
     <!-- Full Member Directory Section -->
     <section id="members" class="py-24 relative z-10 bg-[#070306]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -852,23 +753,23 @@
             <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up" data-aos-duration="1000">
                 <span class="text-fiery-500 font-bold uppercase tracking-widest text-xs px-3 py-1 rounded-full bg-fiery-950/80 border border-fiery-900">Agenda Kegiatan</span>
                 <h2 class="text-3xl sm:text-4xl font-black mt-4 mb-4 tracking-tight">Program Kerja Unggulan</h2>
-                <p class="text-gray-400 text-base sm:text-lg">Rangkaian program kerja berorientasi pengembangan potensi dan karakter siswa SMAN 1 Wanasari.</p>
+                <p class="text-gray-400 text-base sm:text-lg">Menjadikan siswa yang aktif kreatif memiliki rasa kebersamaan dan perduli terhadap sesama.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="bg-gray-900/80 border border-fiery-950 rounded-2xl p-6 glow-box">
                     <div class="w-12 h-12 rounded-xl bg-fiery-600/20 text-fiery-500 flex items-center justify-center mb-4 font-bold">01</div>
-                    <h3 class="text-lg font-bold text-white mb-2">Wanasari Science & Arts Olympiad</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Kompetisi bidang akademik, sains, seni dan budaya untuk mengasah bakat unggul siswa.</p>
+                    <h3 class="text-lg font-bold text-white mb-2">Mengadakan Ekstraluriluler Futsal</h3>
+                      <p class="text-gray-400 text-sm leading-relaxed">Membangun semangat siswa SMAN 01 WANASARI melalui eskul futsal.</p>
                 </div>
                 <div class="bg-gray-900/80 border border-fiery-950 rounded-2xl p-6 glow-box">
                     <div class="w-12 h-12 rounded-xl bg-amberGlow-500/20 text-amberGlow-400 flex items-center justify-center mb-4 font-bold">02</div>
-                    <h3 class="text-lg font-bold text-white mb-2">Phoenix Cup Sports League</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Turnamen olahraga antar kelas guna mempererat sportivitas dan solidaritas pelajar.</p>
+                    <h3 class="text-lg font-bold text-white mb-2">OSIS Creatif</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Menghadirkan konten kreatif osis setiap 2 bulan sekali.</p>
                 </div>
                 <div class="bg-gray-900/80 border border-fiery-950 rounded-2xl p-6 glow-box">
                     <div class="w-12 h-12 rounded-xl bg-rose-600/20 text-rose-500 flex items-center justify-center mb-4 font-bold">03</div>
-                    <h3 class="text-lg font-bold text-white mb-2">Green School & Social Action</h3>
+                    <h3 class="text-lg font-bold text-white mb-2">Bakti Sosial</h3>
                     <p class="text-gray-400 text-sm leading-relaxed">Aksi bakti sosial kepedulian masyarakat serta gerakan penghijauan lingkungan sekolah.</p>
                 </div>
                 <div class="bg-gray-900/80 border border-fiery-950 rounded-2xl p-6 glow-box">
@@ -1113,6 +1014,23 @@
             requestAnimationFrame(animateFire);
         }
         animateFire();
+      // KOTAK ASPIRASI -> MASUK WA
+const aspirasiForm2 = document.getElementById('aspirasiForm');
+if (aspirasiForm2) {
+  aspirasiForm2.addEventListener('submit', function(e){
+    e.preventDefault();
+    // GANTI NOMOR INI SAMA NOMOR WA LO!
+    const nomorWA = '6285799279433';
+
+    const nama = aspirasiForm2.querySelector('input[type="text"]')?.value || '';
+    const kelas = aspirasiForm2.querySelectorAll('input[type="text"]')[1]?.value || '';
+    const kategori = aspirasiForm2.querySelector('select')?.value || '';
+    const isi = aspirasiForm2.querySelector('textarea')?.value || '';
+
+    const pesan = `Halo OSIS SMAN 1 WANASARI! Ada Aspirasi Baru 🔥\n\nNama: ${nama}\nKelas: ${kelas}\nKategori: ${kategori}\nIsi: ${isi}`;
+    window.open(`https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`, '_blank');
+  });
+}
     </script>
 </body>
 </html>
